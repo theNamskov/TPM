@@ -72,8 +72,23 @@ app.set("trust proxy", "loopback, linklocal, uniquelocal");
 app.use(_express["default"].json());
 app.use(_express["default"].urlencoded({
   extended: true
-}));
-app.use((0, _cors["default"])());
+})); // const whitelist = ["http://localhost:8081"];
+
+var options = {
+  // origin: (origin, callback) => {
+  //     if (whitelist.indexOf(origin) !== -1) {
+  //         callback(null, true)
+  //       } else {
+  //         callback(new Error('Not allowed by CORS'))
+  //       }
+  // },
+  origin: function origin(_origin, callback) {
+    return callback(null, true);
+  },
+  credentials: true,
+  exposedHeaders: ["set-cookie", "eTag", "date"]
+};
+app.use((0, _cors["default"])(options));
 app.get("/", function (req, res) {
   return res.json({
     status: 1,
