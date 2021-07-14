@@ -6,7 +6,7 @@ export const getAllDVLAInfo = async (req, res) => {
   try {
     const dvlaRes = await dvlaModel.findAll();
     return apiResponses.successResponseWithData(res, {
-      headers: dvlaHeader,
+      headers: dvlaHeaders,
       payload: dvlaRes,
     });
   } catch (e) {
