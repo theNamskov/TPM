@@ -35,7 +35,7 @@ var getAllDVLAInfo = /*#__PURE__*/function () {
           case 3:
             dvlaRes = _context.sent;
             return _context.abrupt("return", _responses["default"].successResponseWithData(res, {
-              headers: dvlaHeader,
+              headers: _dvla.dvlaHeaders,
               payload: dvlaRes
             }));
 
