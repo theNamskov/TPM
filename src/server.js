@@ -107,7 +107,21 @@ app.set("trust proxy", "loopback, linklocal, uniquelocal");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors());
+// const whitelist = ["http://localhost:8081"];
+const options = {
+  // origin: (origin, callback) => {
+  //     if (whitelist.indexOf(origin) !== -1) {
+  //         callback(null, true)
+  //       } else {
+  //         callback(new Error('Not allowed by CORS'))
+  //       }
+  // },
+  origin: (origin, callback) => callback(null, true),
+  credentials: true,
+  exposedHeaders: ["set-cookie", "eTag", "date"],
+};
+
+app.use(cors(options));
 
 app.get("/", (req, res) => res.json({ status: 1, msg: "Yawa no dey" }));
 
